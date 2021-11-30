@@ -28,6 +28,7 @@ from heapq import heappop, heappush
 
 def bestSum(n, l, memo=defaultdict(list)):
     if n in memo:
+        # print (memo[n])
         return memo[n]
     if n == 0:
         return[]
@@ -35,15 +36,17 @@ def bestSum(n, l, memo=defaultdict(list)):
         return None
     shortestcombination = list()
     for value in l:
-        result = bestSum(n-value, l, memo.copy())
+        result = bestSum(n-value, l, memo)
         if result != None:
-            if(len(result) < len(shortestcombination)) or len(shortestcombination) == 0:
-                shortestcombination = result
-    if len(shortestcombination) > 0:
-        memo[n] = shortestcombination
-    else:
-        memo[n] = None
+            combination = result+[value]
+            if(len(combination) < len(shortestcombination)) or len(shortestcombination) == 0:                
+                shortestcombination = combination
+    
+    memo[n] = shortestcombination   
+        
     return memo[n]
+
+
 
 
 # teste = defaultdict(list)
