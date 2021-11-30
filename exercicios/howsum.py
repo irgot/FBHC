@@ -10,10 +10,11 @@ def howSum(n, l, memo=defaultdict(list)):
         for lvalue in l:
             remainder = n - lvalue
             result = howSum(remainder, l, memo)
-            memo[remainder] = result
             if result != None:
-                return result+[lvalue]
-    return None
+                memo[n] = result+[lvalue]
+                return memo[n]
+    memo[n] = None
+    return memo[n]
 
 
 memo = defaultdict(list)
@@ -22,9 +23,9 @@ print(howSum(7, [5, 3, 4, 7], memo))
 memo.clear()
 print(howSum(7, [2, 3], memo))
 memo.clear()
-print(howSum(8, [2, 3, 5], memo))
+print(howSum(7, [2, 4], memo))
 memo.clear()
-print(howSum(7, [5, 3, 4, 7], memo))
+print(howSum(8, [2, 3, 5, 7], memo))
 memo.clear()
 print(howSum(300, [7, 14], memo))
 memo.clear()
